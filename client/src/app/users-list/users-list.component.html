@@ -1,0 +1,15 @@
+<div class="users-container">
+    <h2>Users</h2>
+
+    <a routerLink="/users/create" class="btn">Create New User</a>
+
+    <ul>
+        <li *ngFor="let user of users">
+            <span>{{ user.name }} ({{ user.email }})</span>
+
+            <div class="actions">
+                <a [routerLink]="['/users/edit', user.id]">Edit</a>
+            </div>
+        </li>
+    </ul>
+</div>

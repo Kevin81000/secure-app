@@ -1,0 +1,22 @@
+.navbar {
+    background: #222;
+    padding: 1rem;
+    padding: 1rem;
+  display: flex;
+  gap: 1rem;
+
+}
+
+.nav-link {
+    color: #fff;
+    margin-right: 1rem;
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+}
+
+.container {
+    padding: 2rem;
+}
