@@ -1,12 +1,5 @@
-import { ValidationPipe } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { appConfig } from './app/app.config';
+import { App } from './app/app';
 
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
-  app.setGlobalPrefix('api');
-  await app.listen(process.env.PORT || 3000);
-  console.log(`Server running on http://localhost:${process.env.PORT || 3000}/api`);
-}
-bootstrap();
+bootstrapApplication(App, appConfig).catch((err) => console.error(err));
