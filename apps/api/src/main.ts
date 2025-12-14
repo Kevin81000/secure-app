@@ -1,5 +1,15 @@
-import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
-import { App } from './app/app';
 
-bootstrapApplication(App, appConfig).catch((err) => console.error(err));
+
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app/app.module';
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  app.enableCors({
+    origin: 'http://localhost:4200',
+    credentials: true,
+  });
+  await app.listen(3000);
+  console.log('Backend is running on http://localhost:3000');
+}
+bootstrap();

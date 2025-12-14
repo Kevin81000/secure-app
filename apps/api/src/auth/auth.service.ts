@@ -28,7 +28,6 @@ export class AuthService {
         user.email = email;
         user.password = hashedPassword;
         user.name = name;
-        user.role = role;
         user.organizationId = null;
 
         await this.usersRepository.save(user);
