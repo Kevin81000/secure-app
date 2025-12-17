@@ -16,10 +16,10 @@ export class TaskOwnershipGuard implements CanActivate {
     const user = req.user;
     const taskId = req.params.id;
 
-    // Use the new secure method
+
     const task = await this.tasksService.findOneForUser(taskId, user);
 
-    // If we reached here, the service already validated permissions.
+
     return true;
   }
 }
