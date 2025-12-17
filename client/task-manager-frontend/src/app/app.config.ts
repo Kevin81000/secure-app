@@ -10,8 +10,18 @@ export const appConfig: ApplicationConfig = {
       { path: 'welcome', loadComponent: () => import('./welcome/welcome.component').then(m => m.WelcomeComponent) },
       { path: 'login', loadComponent: () => import('./auth/login.component').then(m => m.LoginComponent) },
       { path: 'register', loadComponent: () => import('./auth/register.component').then(m => m.RegisterComponent) },
-      { path: 'dashboard', loadComponent: () => import('./dashboard/dashboard.component').then(m => m.DashboardComponent) },
+
+      {
+        path: 'dashboard',
+        loadComponent: () => import('./dashboard/dashboard.component').then(m => m.DashboardComponent),
+        children: [
+          { path: 'tasks', loadComponent: () => import('./tasks/tasks.component').then(m => m.TasksComponent) },
+          { path: 'users', loadComponent: () => import('./users/users.component').then(m => m.UsersComponent) },
+          { path: '', redirectTo: 'tasks', pathMatch: 'full' } // Default to tasks
+        ]
+      },
       { path: '**', redirectTo: 'welcome' }
     ])
   ]
 };
+

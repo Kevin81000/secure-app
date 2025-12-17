@@ -1,28 +1,35 @@
+// src/app.module.ts
+
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UsersModule } from '../users/users.module';
+import { ConfigModule } from '@nestjs/config';
+import { JwtModule } from '@nestjs/jwt';
 import { AuthModule } from '../auth/auth.module';
-import { ProfileModule } from '../profile/profile.module';
+import { UsersModule } from '../users/users.module';
 import { TasksModule } from '../tasks/tasks.module';
-import { AuditModule } from '../audit/audit.module';
 import { User } from '../users/entities/user.entity';
 import { Task } from '../tasks/task.entity';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: 'db.sqlite',
       entities: [User, Task],
-      synchronize: true,
+      synchronize: true, // Set to false in production
+      logging: false,
     }),
-
-    UsersModule,
+    JwtModule.register({
+      global: true,
+      secret: 'your-super-secret-jwt-key-change-in-production',
+      signOptions: { expiresIn: '24h' },
+    }),
     AuthModule,
-    ProfileModule,
+    UsersModule,
     TasksModule,
-    AuditModule,
   ],
 })
-export class AppModule {}
-
+export class AppModule { }
